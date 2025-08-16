@@ -36,21 +36,20 @@ interface Report {
 
 class SalesReport implements Report {
   generate(): void {
-    console.log('Generando reporte de ventas...')
+    console.log('%cGenerando reporte de ventas...', COLORS.green);
   }
 }
 
 class InventoryReport implements Report {
   generate(): void {
-    console.log('Generando reporte de inventario...');
+    console.log('%cGenerando reporte de inventario...', COLORS.orange);
   }
-  
 }
 
 // 3. Clase Base ReportFactory con el Método Factory
 
 abstract class ReportFactory {
-  abstract createReport(): Report;
+  protected abstract createReport(): Report;
 
   generateReport(): void {
     const report = this.createReport();
@@ -61,13 +60,13 @@ abstract class ReportFactory {
 // 4. Clases Concretas de Fábricas de Reportes
 
 class SalesReportFactory extends ReportFactory {
-  override createReport(): Report {
+  createReport(): Report {
     return new SalesReport();
   }
 }
 
 class InventoryReportFactory extends ReportFactory {
-  override createReport(): Report {
+  createReport(): Report {
     return new InventoryReport();
   }
 }
